@@ -42,7 +42,8 @@
             picDisplay.TabIndex = 0;
             picDisplay.TabStop = false;
             picDisplay.Click += picDisplay_Click;
-            picDisplay.MouseMove += picDisplay_MouseMove;
+            picDisplay.MouseLeave += picDisplay_MouseLeave;
+            picDisplay.MouseMove += picDisplay_MouseMove_1;
             // 
             // timer1
             // 
