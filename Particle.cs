@@ -20,6 +20,7 @@ namespace Ccs_Course_03
 
         public static Random rand = new Random();
 
+        public bool SpeedVector = false;
         public void Patricle()
         {
             // генерируем произвольное направление и скорость
@@ -54,6 +55,7 @@ namespace Ccs_Course_03
 
         public class ParticleColorful : Particle
         {
+            
             // два новых поля под цвет начальный и конечный
             public Color FromColor;
             public Color ToColor;
@@ -75,6 +77,7 @@ namespace Ccs_Course_03
                 return Color.FromArgb(a, r, g, b);
             }
 
+            // ну и отрисовку перепишем
             public override void Draw(Graphics g)
             {
                 float k = Math.Min(1f, Life / 100);
@@ -84,7 +87,11 @@ namespace Ccs_Course_03
                 var b = new SolidBrush(color);
 
                 g.FillEllipse(b, X - Radius, Y - Radius, Radius * 2, Radius * 2);
+                if (SpeedVector)
+                {
+                    g.DrawLine(new Pen(Color.White), X, Y, X + SpeedX * 2, Y + SpeedY * 2);
 
+                }
                 b.Dispose();
             }
         }

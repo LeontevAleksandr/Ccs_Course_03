@@ -42,6 +42,7 @@
             tbRadius = new TrackBar();
             label5 = new Label();
             lblCountParticle = new Label();
+            cbSpeedVector = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbSpreading).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbSpeed).BeginInit();
@@ -54,7 +55,7 @@
             // 
             picDisplay.Location = new Point(12, 12);
             picDisplay.Name = "picDisplay";
-            picDisplay.Size = new Size(776, 426);
+            picDisplay.Size = new Size(889, 488);
             picDisplay.TabIndex = 0;
             picDisplay.TabStop = false;
             picDisplay.MouseMove += picDisplay_MouseMove;
@@ -67,7 +68,7 @@
             // 
             // tbSpreading
             // 
-            tbSpreading.Location = new Point(825, 37);
+            tbSpreading.Location = new Point(907, 36);
             tbSpreading.Maximum = 100;
             tbSpreading.Name = "tbSpreading";
             tbSpreading.Size = new Size(174, 56);
@@ -77,7 +78,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(856, 14);
+            label1.Location = new Point(938, 13);
             label1.Name = "label1";
             label1.Size = new Size(116, 20);
             label1.TabIndex = 2;
@@ -85,7 +86,7 @@
             // 
             // tbSpeed
             // 
-            tbSpeed.Location = new Point(825, 123);
+            tbSpeed.Location = new Point(907, 122);
             tbSpeed.Minimum = 1;
             tbSpeed.Name = "tbSpeed";
             tbSpeed.Size = new Size(174, 56);
@@ -96,7 +97,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(877, 100);
+            label2.Location = new Point(959, 99);
             label2.Name = "label2";
             label2.Size = new Size(73, 20);
             label2.TabIndex = 4;
@@ -104,7 +105,7 @@
             // 
             // tbParticlesPerTick
             // 
-            tbParticlesPerTick.Location = new Point(825, 206);
+            tbParticlesPerTick.Location = new Point(907, 205);
             tbParticlesPerTick.Maximum = 5;
             tbParticlesPerTick.Minimum = 1;
             tbParticlesPerTick.Name = "tbParticlesPerTick";
@@ -117,7 +118,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(844, 183);
+            label3.Location = new Point(926, 182);
             label3.Name = "label3";
             label3.Size = new Size(141, 20);
             label3.TabIndex = 6;
@@ -125,7 +126,7 @@
             // 
             // tbLife
             // 
-            tbLife.Location = new Point(825, 288);
+            tbLife.Location = new Point(907, 287);
             tbLife.Maximum = 200;
             tbLife.Name = "tbLife";
             tbLife.Size = new Size(174, 56);
@@ -135,7 +136,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(811, 265);
+            label4.Location = new Point(893, 264);
             label4.Name = "label4";
             label4.Size = new Size(201, 20);
             label4.TabIndex = 8;
@@ -143,7 +144,7 @@
             // 
             // tbRadius
             // 
-            tbRadius.Location = new Point(825, 362);
+            tbRadius.Location = new Point(907, 361);
             tbRadius.Maximum = 5;
             tbRadius.Minimum = 1;
             tbRadius.Name = "tbRadius";
@@ -155,7 +156,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(854, 339);
+            label5.Location = new Point(936, 338);
             label5.Name = "label5";
             label5.Size = new Size(118, 20);
             label5.TabIndex = 10;
@@ -164,17 +165,29 @@
             // lblCountParticle
             // 
             lblCountParticle.AutoSize = true;
-            lblCountParticle.Location = new Point(835, 417);
+            lblCountParticle.Location = new Point(917, 416);
             lblCountParticle.Name = "lblCountParticle";
             lblCountParticle.Size = new Size(156, 20);
             lblCountParticle.TabIndex = 11;
             lblCountParticle.Text = "Количество частиц: 0";
             // 
+            // cbSpeedVector
+            // 
+            cbSpeedVector.AutoSize = true;
+            cbSpeedVector.Location = new Point(953, 458);
+            cbSpeedVector.Name = "cbSpeedVector";
+            cbSpeedVector.Size = new Size(79, 24);
+            cbSpeedVector.TabIndex = 12;
+            cbSpeedVector.Text = "Вектор";
+            cbSpeedVector.UseVisualStyleBackColor = true;
+            cbSpeedVector.CheckedChanged += cbSpeedVector_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1022, 462);
+            ClientSize = new Size(1093, 512);
+            Controls.Add(cbSpeedVector);
             Controls.Add(lblCountParticle);
             Controls.Add(label5);
             Controls.Add(tbRadius);
@@ -214,5 +227,6 @@
         private TrackBar tbRadius;
         private Label label5;
         private Label lblCountParticle;
+        private CheckBox cbSpeedVector;
     }
 }

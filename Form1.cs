@@ -9,8 +9,16 @@ namespace Ccs_Course_03
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter; // тут убрали явное создание
 
-        GravityPoint point1; // добавил поле под первую точку
-        GravityPoint point2; // добавил поле под вторую точку
+        GravityPoint point1;
+        GravityPoint point2;
+        GravityPoint point5;
+        GravityPoint point6;
+        GravityPoint point11;
+        AntiGravityPoint point3;
+        AntiGravityPoint point7;
+        AntiGravityPoint point8;
+        AntiGravityPoint point9;
+        AntiGravityPoint point10;
 
         public Form1()
         {
@@ -20,59 +28,99 @@ namespace Ccs_Course_03
             this.emitter = new Emitter // создаю эмиттер и привязываю его к полю emitter
             {
                 Direction = 90,
-                Spreading = 10,
-                SpeedMin = 10,
+                Spreading = 360,
+                SpeedMin = 0,
                 SpeedMax = 10,
-                ColorFrom = Color.Gold,
-                ColorTo = Color.FromArgb(0, Color.Red),
+                ColorFrom = Color.HotPink,
+                ColorTo = Color.FromArgb(0, Color.White),
                 ParticlesPerTick = 10,
                 X = picDisplay.Width / 2,
-                Y = picDisplay.Height,
+                Y = picDisplay.Height - 100,
             };
 
             emitters.Add(this.emitter);
 
+            point3 = new AntiGravityPoint
+            {
+                X = picDisplay.Width / 2 + 300,
+                Y = picDisplay.Height - 50,
+                NewFromColor = Color.FromArgb(255, Color.Azure),
+                NewToColor = Color.FromArgb(255, Color.Azure)
+            };
+            point7 = new AntiGravityPoint
+            {
+                X = picDisplay.Width / 2 - 300,
+                Y = picDisplay.Height - 50,
+                NewFromColor = Color.FromArgb(255, Color.White),
+                NewToColor = Color.FromArgb(255, Color.Gray)
+            };
+            point8 = new AntiGravityPoint
+            {
+                X = picDisplay.Width / 2 - 150,
+                Y = picDisplay.Height - 50,
+                NewFromColor = Color.FromArgb(255, Color.Cornsilk),
+                NewToColor = Color.FromArgb(255, Color.Cornsilk)
+            };
+            point9 = new AntiGravityPoint
+            {
+                X = picDisplay.Width / 2 + 150,
+                Y = picDisplay.Height - 50,
+                NewFromColor = Color.FromArgb(255, Color.Crimson),
+                NewToColor = Color.FromArgb(255, Color.Crimson)
+            };
+            point10 = new AntiGravityPoint
+            {
+                X = picDisplay.Width / 2,
+                Y = picDisplay.Height - 50,
+                NewFromColor = Color.FromArgb(255, Color.DarkSeaGreen),
+                NewToColor = Color.FromArgb(255, Color.DarkSeaGreen)
+            };
             point1 = new GravityPoint
             {
-                X = picDisplay.Width / 2 + 100,
-                Y = picDisplay.Height / 2,
+                X = picDisplay.Width / 2 + 300,
+                Y = picDisplay.Height - 350,
+                NewFromColor = Color.FromArgb(255, Color.Green),
+                NewToColor = Color.FromArgb(255, Color.GreenYellow)
             };
             point2 = new GravityPoint
             {
-                X = picDisplay.Width / 2 - 100,
-                Y = picDisplay.Height / 2,
+                X = picDisplay.Width / 2 - 300,
+                Y = picDisplay.Height - 350,
+                NewFromColor = Color.FromArgb(255, Color.CadetBlue),
+                NewToColor = Color.FromArgb(255, Color.Blue)
             };
-
-            // привязываем поля к эмиттеру
-            emitter.impactPoints.Add(point1);
-            emitter.impactPoints.Add(point2);
-
-            /*emitter = new TopEmitter
+            point5 = new GravityPoint
             {
-                Width = picDisplay.Width,
-                GravitationY = 0.25f
-            };*/
-
-            /*// гравитон
-            emitter.impactPoints.Add(new GravityPoint
+                X = picDisplay.Width / 2 - 150,
+                Y = picDisplay.Height - 350,
+                NewFromColor = Color.FromArgb(255, Color.Red),
+                NewToColor = Color.FromArgb(255, Color.DarkRed)
+            };
+            point6 = new GravityPoint
             {
-                X = (float)(picDisplay.Width * 0.25),
-                Y = picDisplay.Height / 2
-            });
-
-            // в центре антигравитон
-            emitter.impactPoints.Add(new AntiGravityPoint
+                X = picDisplay.Width / 2 + 150,
+                Y = picDisplay.Height - 350,
+                NewFromColor = Color.FromArgb(255, Color.Gainsboro),
+                NewToColor = Color.FromArgb(255, Color.LightSlateGray)
+            };
+            point11 = new GravityPoint
             {
                 X = picDisplay.Width / 2,
-                Y = picDisplay.Height / 2
-            });
+                Y = picDisplay.Height - 350,
+                NewFromColor = Color.FromArgb(255, Color.Indigo),
+                NewToColor = Color.FromArgb(255, Color.MediumVioletRed)
+            };
 
-            // снова гравитон
-            emitter.impactPoints.Add(new GravityPoint
-            {
-                X = (float)(picDisplay.Width * 0.75),
-                Y = picDisplay.Height / 2
-            });*/
+            emitter.impactPoints.Add(point1);
+            emitter.impactPoints.Add(point2);
+            emitter.impactPoints.Add(point3);
+            emitter.impactPoints.Add(point5);
+            emitter.impactPoints.Add(point6);
+            emitter.impactPoints.Add(point7);
+            emitter.impactPoints.Add(point8);
+            emitter.impactPoints.Add(point9);
+            emitter.impactPoints.Add(point10);
+            emitter.impactPoints.Add(point11);
         }
         int counter = 0;
 
@@ -86,6 +134,7 @@ namespace Ccs_Course_03
                 emitter.Render(g); // рендерим систему
             }
 
+            lblCountParticle.Text = $"Количество частиц: {emitter.ParticlesCount}";
             picDisplay.Invalidate();
         }
 
@@ -109,8 +158,11 @@ namespace Ccs_Course_03
 
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            emitter.SpeedMin = tbSpeed.Value + 1;
-            emitter.SpeedMax = tbSpeed.Value + 10;
+            emitter.SpeedMax = tbSpeed.Value + 3;
+            if (emitter.SpeedMax <= emitter.SpeedMin)
+            {
+                emitter.SpeedMax += 10;
+            }
         }
 
         private void tbParticlesPerTick_Scroll(object sender, EventArgs e)
@@ -130,20 +182,9 @@ namespace Ccs_Course_03
             emitter.RadiusMax = tbRadius.Value + 10;
         }
 
-        //private void tbDirection_Scroll(object sender, EventArgs e)
-        //{
-        //    emitter.Direction = tbDirection.Value; // направлению эмиттера присваиваем значение ползунка 
-        //    lblDirection.Text = $"{tbDirection.Value}°";
-        //}
-
-        //private void tbGraviton_Scroll(object sender, EventArgs e)
-        //{
-        //    point1.Power = tbGraviton.Value;
-        //}
-        //
-        //private void tbGraviton2_Scroll(object sender, EventArgs e)
-        //{
-        //    point2.Power = tbGraviton2.Value;
-        //}
+        private void cbSpeedVector_CheckedChanged(object sender, EventArgs e)
+        {
+            emitter.SpeedVector = (cbSpeedVector.Checked);
+        }
     }
 }

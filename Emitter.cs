@@ -13,13 +13,14 @@ namespace Ccs_Course_03
         public int Y; // соответствующая координата Y 
         public int Direction = 0; // вектор направления в градусах куда сыпет эмиттер
         public int Spreading = 360; // разброс частиц относительно Direction
-        public int SpeedMin = 1; // начальная минимальная скорость движения частицы
+        public int SpeedMin = 0; // начальная минимальная скорость движения частицы
         public int SpeedMax = 10; // начальная максимальная скорость движения частицы
         public int RadiusMin = 2; // минимальный радиус частицы
         public int RadiusMax = 10; // максимальный радиус частицы
         public int LifeMin = 20; // минимальное время жизни частицы
         public int LifeMax = 100; // максимальное время жизни частицы
         public int ParticlesPerTick = 1;
+        public bool SpeedVector = false;
 
         public Color ColorFrom = Color.White; // начальный цвет частицы
         public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
@@ -28,23 +29,25 @@ namespace Ccs_Course_03
 
         public List<IImpactPoint> impactPoints = new List<IImpactPoint>();
 
-        public int ParticlesCount = 500;
+        public int ParticlesCount = 0;
 
         public int MousePositionX;
         public int MousePositionY;
 
         public float GravitationX = 0;
-        public float GravitationY = 0;  // отключил
+        public float GravitationY = 1;
 
         public void UpdateState()
         {
             int particlesToCreate = ParticlesPerTick;
-
+            ParticlesCount = 500;
             foreach (var particle in particles)
             {
+                particle.SpeedVector = this.SpeedVector;
                 particle.Life -= 1;
                 if (particle.Life < 0)
                 {
+                    ParticlesCount -= 1;
                     if (particlesToCreate > 0)
                     {
                         /* у нас как сброс частицы равносилен созданию частицы */
