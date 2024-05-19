@@ -61,12 +61,18 @@ namespace Ccs_Course_03
             // для смеси цветов
             public static Color MixColor(Color color1, Color color2, float k)
             {
-                return Color.FromArgb(
-                    (int)(color2.A * k + color1.A * (1 - k)),
-                    (int)(color2.R * k + color1.R * (1 - k)),
-                    (int)(color2.G * k + color1.G * (1 - k)),
-                    (int)(color2.B * k + color1.B * (1 - k))
-                );
+                int a = (int)(color2.A * k + color1.A * (1 - k));
+                int r = (int)(color2.R * k + color1.R * (1 - k));
+                int g = (int)(color2.G * k + color1.G * (1 - k));
+                int b = (int)(color2.B * k + color1.B * (1 - k));
+
+                // Ограничиваем значения от 0 до 255
+                a = Math.Clamp(a, 0, 255);
+                r = Math.Clamp(r, 0, 255);
+                g = Math.Clamp(g, 0, 255);
+                b = Math.Clamp(b, 0, 255);
+
+                return Color.FromArgb(a, r, g, b);
             }
 
             public override void Draw(Graphics g)

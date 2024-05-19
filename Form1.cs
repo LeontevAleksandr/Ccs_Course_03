@@ -9,6 +9,9 @@ namespace Ccs_Course_03
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter; // тут убрали явное создание
 
+        GravityPoint point1; // добавил поле под первую точку
+        GravityPoint point2; // добавил поле под вторую точку
+
         public Form1()
         {
             InitializeComponent();
@@ -16,7 +19,7 @@ namespace Ccs_Course_03
 
             this.emitter = new Emitter // создаю эмиттер и привязываю его к полю emitter
             {
-                Direction = 0,
+                Direction = 90,
                 Spreading = 10,
                 SpeedMin = 10,
                 SpeedMax = 10,
@@ -24,23 +27,25 @@ namespace Ccs_Course_03
                 ColorTo = Color.FromArgb(0, Color.Red),
                 ParticlesPerTick = 10,
                 X = picDisplay.Width / 2,
-                Y = picDisplay.Height / 2,
+                Y = picDisplay.Height,
             };
 
             emitters.Add(this.emitter);
 
-            emitter.impactPoints.Add(new GravityPoint
+            point1 = new GravityPoint
             {
                 X = picDisplay.Width / 2 + 100,
                 Y = picDisplay.Height / 2,
-            });
-
-            // добавил второй гравитон
-            emitter.impactPoints.Add(new GravityPoint
+            };
+            point2 = new GravityPoint
             {
                 X = picDisplay.Width / 2 - 100,
                 Y = picDisplay.Height / 2,
-            });
+            };
+
+            // привязываем поля к эмиттеру
+            emitter.impactPoints.Add(point1);
+            emitter.impactPoints.Add(point2);
 
             /*emitter = new TopEmitter
             {
@@ -86,26 +91,59 @@ namespace Ccs_Course_03
 
         private void picDisplay_MouseMove(object sender, MouseEventArgs e)
         {
-            emitter.MousePositionX = e.X;
-            emitter.MousePositionY = e.Y;
-        }
-
-        private void tbDirection_Scroll(object sender, EventArgs e)
-        {
-            emitter.Direction = tbDirection.Value; // направлению эмиттера присваиваем значение ползунка 
-            lblDirection.Text = $"{tbDirection.Value}°";
-        }
-
-        private void tbGraviton_Scroll(object sender, EventArgs e)
-        {
-            foreach (var p in emitter.impactPoints)
+            foreach (var emitter in emitters)
             {
-                if (p is GravityPoint) // так как impactPoints не обязательно содержит поле Power, надо проверить на тип 
-                {
-                    // если гравитон то меняем силу
-                    (p as GravityPoint).Power = tbGraviton.Value;
-                }
+                emitter.MousePositionX = e.X;
+                emitter.MousePositionY = e.Y;
             }
+
+            // а тут передаем положение мыши, в положение гравитона
+            //point2.X = e.X;
+            //point2.Y = e.Y;
         }
+
+        private void tbSpreading_Scroll(object sender, EventArgs e)
+        {
+            emitter.Spreading = tbSpreading.Value;
+        }
+
+        private void tbSpeed_Scroll(object sender, EventArgs e)
+        {
+            emitter.SpeedMin = tbSpeed.Value + 1;
+            emitter.SpeedMax = tbSpeed.Value + 10;
+        }
+
+        private void tbParticlesPerTick_Scroll(object sender, EventArgs e)
+        {
+            emitter.ParticlesPerTick = tbParticlesPerTick.Value;
+        }
+
+        private void tbLife_Scroll(object sender, EventArgs e)
+        {
+            emitter.LifeMin = tbLife.Value + 20;
+            emitter.LifeMax = tbLife.Value + 100;
+        }
+
+        private void tbRadius_Scroll(object sender, EventArgs e)
+        {
+            emitter.RadiusMin = tbRadius.Value + 2;
+            emitter.RadiusMax = tbRadius.Value + 10;
+        }
+
+        //private void tbDirection_Scroll(object sender, EventArgs e)
+        //{
+        //    emitter.Direction = tbDirection.Value; // направлению эмиттера присваиваем значение ползунка 
+        //    lblDirection.Text = $"{tbDirection.Value}°";
+        //}
+
+        //private void tbGraviton_Scroll(object sender, EventArgs e)
+        //{
+        //    point1.Power = tbGraviton.Value;
+        //}
+        //
+        //private void tbGraviton2_Scroll(object sender, EventArgs e)
+        //{
+        //    point2.Power = tbGraviton2.Value;
+        //}
     }
 }

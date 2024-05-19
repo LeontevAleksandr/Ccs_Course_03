@@ -31,13 +31,23 @@
             components = new System.ComponentModel.Container();
             picDisplay = new PictureBox();
             timer1 = new System.Windows.Forms.Timer(components);
-            tbDirection = new TrackBar();
+            tbSpreading = new TrackBar();
             label1 = new Label();
-            lblDirection = new Label();
-            tbGraviton = new TrackBar();
+            tbSpeed = new TrackBar();
+            label2 = new Label();
+            tbParticlesPerTick = new TrackBar();
+            label3 = new Label();
+            tbLife = new TrackBar();
+            label4 = new Label();
+            tbRadius = new TrackBar();
+            label5 = new Label();
+            lblCountParticle = new Label();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)tbDirection).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)tbGraviton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpreading).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbParticlesPerTick).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbLife).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbRadius).BeginInit();
             SuspendLayout();
             // 
             // picDisplay
@@ -55,56 +65,136 @@
             timer1.Interval = 40;
             timer1.Tick += timer1_Tick;
             // 
-            // tbDirection
+            // tbSpreading
             // 
-            tbDirection.Location = new Point(12, 444);
-            tbDirection.Maximum = 359;
-            tbDirection.Name = "tbDirection";
-            tbDirection.Size = new Size(250, 56);
-            tbDirection.TabIndex = 1;
-            tbDirection.Scroll += tbDirection_Scroll;
+            tbSpreading.Location = new Point(825, 37);
+            tbSpreading.Maximum = 100;
+            tbSpreading.Name = "tbSpreading";
+            tbSpreading.Size = new Size(174, 56);
+            tbSpreading.TabIndex = 1;
+            tbSpreading.Scroll += tbSpreading_Scroll;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(269, 463);
+            label1.Location = new Point(856, 14);
             label1.Name = "label1";
-            label1.Size = new Size(0, 20);
+            label1.Size = new Size(116, 20);
             label1.TabIndex = 2;
+            label1.Text = "Распределение";
             // 
-            // lblDirection
+            // tbSpeed
             // 
-            lblDirection.AutoSize = true;
-            lblDirection.Location = new Point(269, 463);
-            lblDirection.Name = "lblDirection";
-            lblDirection.Size = new Size(17, 20);
-            lblDirection.TabIndex = 3;
-            lblDirection.Text = "0";
+            tbSpeed.Location = new Point(825, 123);
+            tbSpeed.Minimum = 1;
+            tbSpeed.Name = "tbSpeed";
+            tbSpeed.Size = new Size(174, 56);
+            tbSpeed.TabIndex = 3;
+            tbSpeed.Value = 1;
+            tbSpeed.Scroll += tbSpeed_Scroll;
             // 
-            // tbGraviton
+            // label2
             // 
-            tbGraviton.Location = new Point(308, 444);
-            tbGraviton.Maximum = 100;
-            tbGraviton.Name = "tbGraviton";
-            tbGraviton.Size = new Size(163, 56);
-            tbGraviton.TabIndex = 4;
-            tbGraviton.Scroll += tbGraviton_Scroll;
+            label2.AutoSize = true;
+            label2.Location = new Point(877, 100);
+            label2.Name = "label2";
+            label2.Size = new Size(73, 20);
+            label2.TabIndex = 4;
+            label2.Text = "Скорость";
+            // 
+            // tbParticlesPerTick
+            // 
+            tbParticlesPerTick.Location = new Point(825, 206);
+            tbParticlesPerTick.Maximum = 5;
+            tbParticlesPerTick.Minimum = 1;
+            tbParticlesPerTick.Name = "tbParticlesPerTick";
+            tbParticlesPerTick.Size = new Size(174, 56);
+            tbParticlesPerTick.TabIndex = 5;
+            tbParticlesPerTick.TabStop = false;
+            tbParticlesPerTick.Value = 1;
+            tbParticlesPerTick.Scroll += tbParticlesPerTick_Scroll;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(844, 183);
+            label3.Name = "label3";
+            label3.Size = new Size(141, 20);
+            label3.TabIndex = 6;
+            label3.Text = "Количество частиц";
+            // 
+            // tbLife
+            // 
+            tbLife.Location = new Point(825, 288);
+            tbLife.Maximum = 200;
+            tbLife.Name = "tbLife";
+            tbLife.Size = new Size(174, 56);
+            tbLife.TabIndex = 7;
+            tbLife.Scroll += tbLife_Scroll;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(811, 265);
+            label4.Name = "label4";
+            label4.Size = new Size(201, 20);
+            label4.TabIndex = 8;
+            label4.Text = "Продолжительность жизни";
+            // 
+            // tbRadius
+            // 
+            tbRadius.Location = new Point(825, 362);
+            tbRadius.Maximum = 5;
+            tbRadius.Minimum = 1;
+            tbRadius.Name = "tbRadius";
+            tbRadius.Size = new Size(174, 56);
+            tbRadius.TabIndex = 9;
+            tbRadius.Value = 1;
+            tbRadius.Scroll += tbRadius_Scroll;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(854, 339);
+            label5.Name = "label5";
+            label5.Size = new Size(118, 20);
+            label5.TabIndex = 10;
+            label5.Text = "Радиус частицы";
+            // 
+            // lblCountParticle
+            // 
+            lblCountParticle.AutoSize = true;
+            lblCountParticle.Location = new Point(835, 417);
+            lblCountParticle.Name = "lblCountParticle";
+            lblCountParticle.Size = new Size(156, 20);
+            lblCountParticle.TabIndex = 11;
+            lblCountParticle.Text = "Количество частиц: 0";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 505);
-            Controls.Add(tbGraviton);
-            Controls.Add(lblDirection);
+            ClientSize = new Size(1022, 462);
+            Controls.Add(lblCountParticle);
+            Controls.Add(label5);
+            Controls.Add(tbRadius);
+            Controls.Add(label4);
+            Controls.Add(tbLife);
+            Controls.Add(label3);
+            Controls.Add(tbParticlesPerTick);
+            Controls.Add(label2);
+            Controls.Add(tbSpeed);
             Controls.Add(label1);
-            Controls.Add(tbDirection);
+            Controls.Add(tbSpreading);
             Controls.Add(picDisplay);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)picDisplay).EndInit();
-            ((System.ComponentModel.ISupportInitialize)tbDirection).EndInit();
-            ((System.ComponentModel.ISupportInitialize)tbGraviton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpreading).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbParticlesPerTick).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbLife).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbRadius).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -113,9 +203,16 @@
 
         private PictureBox picDisplay;
         private System.Windows.Forms.Timer timer1;
-        private TrackBar tbDirection;
+        private TrackBar tbSpreading;
         private Label label1;
-        private Label lblDirection;
-        private TrackBar tbGraviton;
+        private TrackBar tbSpeed;
+        private Label label2;
+        private TrackBar tbParticlesPerTick;
+        private Label label3;
+        private TrackBar tbLife;
+        private Label label4;
+        private TrackBar tbRadius;
+        private Label label5;
+        private Label lblCountParticle;
     }
 }
