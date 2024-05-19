@@ -16,7 +16,7 @@ namespace Ccs_Course_03
         public abstract void ImpactParticle(Particle particle);
 
         // базовый класс для отрисовки точечки
-        public void Render(Graphics g)
+        public virtual void Render(Graphics g)
         {
             g.FillEllipse(
                     new SolidBrush(Color.Red),

@@ -19,6 +19,7 @@ namespace Ccs_Course_03
         public int RadiusMax = 10; // максимальный радиус частицы
         public int LifeMin = 20; // минимальное время жизни частицы
         public int LifeMax = 100; // максимальное время жизни частицы
+        public int ParticlesPerTick = 1;
 
         public Color ColorFrom = Color.White; // начальный цвет частицы
         public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
@@ -37,12 +38,19 @@ namespace Ccs_Course_03
 
         public void UpdateState()
         {
+            int particlesToCreate = ParticlesPerTick;
+
             foreach (var particle in particles)
             {
                 particle.Life -= 1;
                 if (particle.Life < 0)
                 {
-                    ResetParticle(particle);
+                    if (particlesToCreate > 0)
+                    {
+                        /* у нас как сброс частицы равносилен созданию частицы */
+                        particlesToCreate -= 1; // поэтому уменьшаем счётчик созданных частиц на 1
+                        ResetParticle(particle);
+                    }
                 }
                 else
                 {
@@ -60,22 +68,15 @@ namespace Ccs_Course_03
                 }
             }
 
-            for (var i = 0; i < 10; ++i)
+            // второй цикл меняем на while, 
+            // этот новый цикл также будет срабатывать только в самом начале работы эмиттера
+            // собственно пока не накопится критическая масса частиц
+            while (particlesToCreate >= 1)
             {
-                if (particles.Count < ParticlesCount) // пока частиц меньше 500 генерируем новые
-                {
-                    var particle = new ParticleColorful();
-                    particle.FromColor = Color.White;
-                    particle.ToColor = Color.FromArgb(0, Color.Black);
-
-                    ResetParticle(particle); // добавили вызов ResetParticle
-
-                    particles.Add(particle);
-                }
-                else
-                {
-                    break; // а если частиц уже 500 штук, то ничего не генерирую
-                }
+                particlesToCreate -= 1;
+                var particle = CreateParticle();
+                ResetParticle(particle);
+                particles.Add(particle);
             }
         }
 
@@ -96,6 +97,15 @@ namespace Ccs_Course_03
             particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
 
             particle.Radius = Particle.rand.Next(RadiusMin, RadiusMax);
+        }
+
+        public virtual Particle CreateParticle()
+        {
+            var particle = new ParticleColorful();
+            particle.FromColor = ColorFrom;
+            particle.ToColor = ColorTo;
+
+            return particle;
         }
 
         public void Render(Graphics g)
