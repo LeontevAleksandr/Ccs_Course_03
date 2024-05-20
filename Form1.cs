@@ -28,7 +28,7 @@ namespace Ccs_Course_03
             this.emitter = new Emitter // создаю эмиттер и привязываю его к полю emitter
             {
                 Direction = 90,
-                Spreading = 360,
+                Spreading = 100,
                 SpeedMin = 0,
                 SpeedMax = 10,
                 ColorFrom = Color.HotPink,

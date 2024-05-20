@@ -37,6 +37,8 @@ namespace Ccs_Course_03
         public float GravitationX = 0;
         public float GravitationY = 1;
 
+         List<Particle> particlesToRemove = new List<Particle>();
+
         public void UpdateState()
         {
             int particlesToCreate = ParticlesPerTick;
@@ -45,8 +47,10 @@ namespace Ccs_Course_03
             {
                 particle.SpeedVector = this.SpeedVector;
                 particle.Life -= 1;
+
                 if (particle.Life < 0)
                 {
+                    particlesToRemove.Add(particle);
                     ParticlesCount -= 1;
                     if (particlesToCreate > 0)
                     {
@@ -69,6 +73,11 @@ namespace Ccs_Course_03
                     particle.X += particle.SpeedX;
                     particle.Y += particle.SpeedY;
                 }
+            }
+
+            foreach (var particle in particlesToRemove)
+            {
+                particles.Remove(particle);
             }
 
             // второй цикл меняем на while, 
@@ -100,6 +109,12 @@ namespace Ccs_Course_03
             particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
 
             particle.Radius = Particle.rand.Next(RadiusMin, RadiusMax);
+
+            if (particle is Particle.ParticleColorful colorfulParticle)
+            {
+                colorfulParticle.FromColor = Color.HotPink;
+                colorfulParticle.ToColor = Color.White; // Например, конечный цвет может быть белым
+            }
         }
 
         public virtual Particle CreateParticle()
